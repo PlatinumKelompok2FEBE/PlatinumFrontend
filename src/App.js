@@ -31,8 +31,11 @@ import ProfileMenu from "./components/ProfileMenu"
 import "swiper/css"
 import "swiper/css/autoplay"
 import "swiper/css/pagination"
+import { DarkMode } from "./utils/darkMode"
 
 function App() {
+    DarkMode();
+
     return (
         <BrowserRouter>
             <Routes>
