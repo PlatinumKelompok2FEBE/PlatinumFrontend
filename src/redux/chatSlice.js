@@ -1,8 +1,4 @@
-import {
-    createAsyncThunk,
-    createEntityAdapter,
-    createSlice,
-} from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import closedServer from "../middlewares/axios/closedServer"
 
 // GET all chats
@@ -18,11 +14,10 @@ export const getChat = createAsyncThunk("chat/getChat", async (thunkAPI) => {
 
 // GET chat by id
 export const getChatById = createAsyncThunk(
-    "chat/getChat",
+    "chat/getChatById",
     async ({ id }, thunkAPI) => {
         try {
             const { data } = await closedServer.get(`/chat/${id}`)
-            console.log(data)
             return data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data)
@@ -30,48 +25,43 @@ export const getChatById = createAsyncThunk(
     }
 )
 
-const chatAdapter = createEntityAdapter()
-
 const chatSlice = createSlice({
     name: "chat",
-    initialState: chatAdapter.getInitialState({
+    initialState: {
         allChats: null,
-        chat: null,
-        loading: "idle",
+        chatMessages: null,
+        loadingChat: "idle",
+        loadingMessage: "idle",
         error: null,
-    }),
+    },
     reducers: {},
     extraReducers: {
         // GET all chats
         [getChat.pending]: (state) => {
-            state.loading = "pending"
+            state.loadingChat = "pending"
         },
         [getChat.fulfilled]: (state, action) => {
-            state.loading = "idle"
-            chatAdapter.setAll(state, action.payload.chats)
-            state.allChat = action.payload.chats
+            state.loadingChat = "idle"
+            state.allChats = action.payload.chats
         },
         [getChat.rejected]: (state, action) => {
-            state.loading = "idle"
+            state.loadingChat = "idle"
             state.error = action.payload
         },
 
         // GET chat by id
         [getChatById.pending]: (state) => {
-            state.loading = "pending"
+            state.loadingMessage = "pending"
         },
         [getChatById.fulfilled]: (state, action) => {
-            state.loading = "idle"
-            chatAdapter.setOne(state, action.payload.chats)
-            state.chat = action.payload.chats
+            state.loadingMessage = "idle"
+            state.chatMessages = action.payload.chatMessages
         },
         [getChatById.rejected]: (state, action) => {
-            state.loading = "idle"
+            state.loadingMessage = "idle"
             state.error = action.payload
         },
     },
 })
-
-export const chatSelectors = chatAdapter.getSelectors((state) => state.chat)
 
 export default chatSlice.reducer
