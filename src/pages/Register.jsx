@@ -49,7 +49,7 @@ const Register = () => {
                             Nama
                         </label>
                         <input
-                            className="w-full rounded-2xl py-3 px-4 placeholder:text-neutral-03 focus:outline-none dark:border-0 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-400 dark:focus:shadow-sm dark:focus:shadow-zinc-700"
+                            className="w-full rounded-2xl border border-neutral-02 py-3 px-4 placeholder:text-neutral-03 focus:outline-none dark:border-0 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-400 dark:focus:shadow-sm dark:focus:shadow-zinc-700"
                             type="text"
                             name="name"
                             // value={name}

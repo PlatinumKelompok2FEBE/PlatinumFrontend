@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setNotification } from "../../redux/productsSlice"
+import { setNotification, setShowNotification } from "../../redux/productsSlice"
 
 const NotificationToast = () => {
     const dispatch = useDispatch()
@@ -7,6 +7,7 @@ const NotificationToast = () => {
 
     notification !== null &&
         setTimeout(() => {
+            dispatch(setShowNotification(false))
             dispatch(setNotification(null))
         }, 5000)
 

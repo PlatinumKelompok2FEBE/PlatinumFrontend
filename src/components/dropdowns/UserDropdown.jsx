@@ -72,7 +72,7 @@ const UserDropdown = ({ profile, loading }) => {
                                             className={classNameJoin(
                                                 active &&
                                                     "hover:text-primary-purple-05 dark:hover:text-primary-purple-03",
-                                                "flex w-full items-center gap-2 dark:text-white"
+                                                "flex w-full items-center gap-2 text-sm dark:text-white"
                                             )}
                                             onClick={() => {
                                                 dispatch(logout())
@@ -80,9 +80,7 @@ const UserDropdown = ({ profile, loading }) => {
                                             }}
                                         >
                                             <FiLogOut />
-                                            <span className="text-sm">
-                                                Logout
-                                            </span>
+                                            <span>Logout</span>
                                         </button>
                                     </>
                                 )}
