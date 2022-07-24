@@ -30,6 +30,7 @@ import ProfileMenu from "./components/ProfileMenu"
 import "swiper/css"
 import "swiper/css/autoplay"
 import "swiper/css/pagination"
+import Chat from "./pages/Chat"
 
 function App() {
     return (
@@ -73,6 +74,7 @@ function App() {
                             path="/notification"
                             element={<Notification />}
                         />
+                        <Route path="/chat" element={<Chat />} />
                     </Route>
                     <Route element={<Topbar />}>
                         <Route

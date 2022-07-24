@@ -5,6 +5,7 @@ import categoriesReducer from "./categoriesSlice"
 import wishlistReducer from "./wishlistSlice"
 import transactionReducer from "./transactionSlice"
 import notificationReducer from "./notificationSlice"
+import chatReducer from "./chatSlice"
 
 export const store = configureStore({
     reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
         wishlist: wishlistReducer,
         transaction: transactionReducer,
         notification: notificationReducer,
+        chat: chatReducer,
     },
 })

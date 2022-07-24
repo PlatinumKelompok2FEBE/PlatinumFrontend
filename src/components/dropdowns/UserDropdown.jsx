@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { Menu, Transition } from "@headlessui/react"
 import { FiLogOut, FiUser } from "react-icons/fi"
+import { RiChat1Fill, RiChat1Line } from "react-icons/ri"
 import { logout } from "../../redux/authSlice"
 import AltPhoto from "../../images/alts/AltPhoto.png"
 import { resetProductState } from "../../redux/productsSlice"
@@ -67,6 +68,17 @@ const UserDropdown = ({ profile, loading }) => {
                                                     </span>
                                                 </>
                                             )}
+                                        </Link>
+                                        <Link
+                                            to="/chat"
+                                            className={classNameJoin(
+                                                active &&
+                                                    "hover:text-primary-purple-05 dark:hover:text-primary-purple-03",
+                                                "flex w-full items-center gap-2 text-sm dark:text-white"
+                                            )}
+                                        >
+                                            <RiChat1Line />
+                                            <span>Chat</span>
                                         </Link>
                                         <button
                                             className={classNameJoin(
