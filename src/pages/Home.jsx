@@ -1,12 +1,7 @@
 import { useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import {
-    getProducts,
-    productsSelectors,
-    resetOffset,
-    setOffset,
-} from "../redux/productsSlice"
+import { getProducts, productsSelectors } from "../redux/productsSlice"
 import Hero from "../components/Hero"
 import Category from "../components/Category"
 import ProductCard from "../components/ProductCard"
@@ -19,25 +14,15 @@ const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const dispatch = useDispatch()
     const products = useSelector(productsSelectors.selectAll)
-    const { keyword, offset, loading } = useSelector((state) => state.products)
+    const { keyword, loading } = useSelector((state) => state.products)
 
     if (searchParams.has("page")) {
         if (Number(searchParams.get("page")) <= 1) {
-            // searchParams.delete("page")
             if (searchParams.has("category")) {
                 setSearchParams({ category: searchParams.get("category") })
             } else {
                 setSearchParams()
             }
-
-            dispatch(resetOffset())
-        }
-        if (Number(searchParams.get("page")) * 10 - 10 !== offset) {
-            dispatch(setOffset(Number(searchParams.get("page"))))
-        }
-    } else {
-        if (Number(searchParams.get("page")) * 10 - 10 !== offset) {
-            dispatch(resetOffset())
         }
     }
 
@@ -46,10 +31,12 @@ const Home = () => {
             getProducts({
                 keyword,
                 category: searchParams.get("category") || "",
-                offset,
+                offset: Number(searchParams.get("page"))
+                    ? Number(searchParams.get("page")) * 10 - 10
+                    : "",
             })
         )
-    }, [keyword, searchParams, offset, dispatch])
+    }, [keyword, searchParams, dispatch])
 
     return (
         <>

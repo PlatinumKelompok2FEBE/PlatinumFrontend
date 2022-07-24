@@ -1,19 +1,13 @@
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
-import {
-    offsetIncrement,
-    offsetDecrement,
-    resetOffset,
-    productsSelectors,
-} from "../../redux/productsSlice"
+import { productsSelectors } from "../../redux/productsSlice"
 import { classNameJoin } from "../../utils/classNameJoin"
 
 const PaginationButton = () => {
     const [limit] = useState(10)
     const [searchParams, setSearchParams] = useSearchParams()
-    const dispatch = useDispatch()
     const products = useSelector(productsSelectors.selectAll)
 
     return (
@@ -40,14 +34,12 @@ const PaginationButton = () => {
                         } else {
                             setSearchParams()
                         }
-                        dispatch(resetOffset())
                     } else {
                         searchParams.set(
                             "page",
                             Number(searchParams.get("page")) - 1
                         )
                         setSearchParams(searchParams)
-                        dispatch(offsetDecrement(10))
                     }
                 }}
             >
@@ -71,14 +63,12 @@ const PaginationButton = () => {
                             ...searchParams?.entries(),
                             ["page", 2],
                         ])
-                        dispatch(offsetIncrement(10))
                     } else {
                         searchParams.set(
                             "page",
                             Number(searchParams.get("page")) + 1
                         )
                         setSearchParams(searchParams)
-                        dispatch(offsetIncrement(10))
                     }
                 }}
             >

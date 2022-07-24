@@ -6,9 +6,6 @@ import {
 import openServer from "../middlewares/axios/openServer"
 import closedServer from "../middlewares/axios/closedServer"
 
-const params = new URLSearchParams(document.location.search)
-const page = Number(params.get("page"))
-
 // GET filtered product
 export const getFilteredProduct = createAsyncThunk(
     "products/filterProducts",
@@ -108,15 +105,11 @@ const productsSlice = createSlice({
         spinner: false,
         error: null,
         keyword: "",
-        offset: page ? page * 10 - 10 : 0,
         notification: null,
         showNotification: false,
         showError: false,
     }),
     reducers: {
-        setOffset: (state, action) => {
-            state.offset = action.payload * 10 - 10
-        },
         setProductsError: (state, action) => {
             state.error = action.payload
         },
@@ -134,15 +127,6 @@ const productsSlice = createSlice({
         },
         keywordQuery: (state, action) => {
             state.keyword = action.payload
-        },
-        offsetIncrement: (state, action) => {
-            state.offset = state.offset + action.payload
-        },
-        offsetDecrement: (state, action) => {
-            state.offset = state.offset - action.payload
-        },
-        resetOffset: (state, action) => {
-            state.offset = 0
         },
         resetProductState: (state) => {
             state.filteredProduct = null
@@ -249,15 +233,11 @@ export const productsSelectors = productsAdapter.getSelectors(
 export const {
     resetError,
     keywordQuery,
-    offsetIncrement,
-    offsetDecrement,
-    resetOffset,
     resetProductState,
     setNotification,
     setShowNotification,
     setShowProductsError,
     setProductsError,
-    setOffset,
 } = productsSlice.actions
 
 export default productsSlice.reducer
