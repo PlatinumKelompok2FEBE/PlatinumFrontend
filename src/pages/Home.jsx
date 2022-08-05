@@ -9,6 +9,7 @@ import PaginationButton from "../components/buttons/PaginationButton"
 import SellFloatingButton from "../components/buttons/SellFloatingButton"
 import ProductSkeleton from "../components/skeletons/ProductSkeleton"
 import Product404 from "../components/unfound/Product404"
+import Chatbot from "../components/Chatbot"
 
 const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -67,6 +68,7 @@ const Home = () => {
                     )}
                 </div>
             </div>
+            <Chatbot />
             {loading === "idle" && products.length === 0 && <Product404 />}
             <SellFloatingButton />
         </>
